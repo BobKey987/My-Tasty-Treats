@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Cancelled - Tasty Treats</title>
+    <link rel="stylesheet" href="Bakery Style.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin-top: 50px;
+        }
+        .container {
+            background-color: palevioletred;
+            border: 1px solid #ff0000;
+            padding: 40px;
+            margin: 0 auto;
+            width: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #820000;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: rgb(186, 0, 0);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: maroon;
+        }
+    </style>
+</head>
+<body>
+    <br><br><br><br><br><br><br>
+    <div class="container">
+        <h1>Order Cancelled</h1>
+        <p>Your order has been successfully cancelled. If this was a mistake, you can go back and place a new order.</p>
+        <button class="back-button" onclick="goBack()">Go Back to Order Page</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'My Bakery.html'; 
+        }
+    </script>
+
+</body>
+</html>

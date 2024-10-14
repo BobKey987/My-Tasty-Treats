@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Treats</title>
+    <link rel="stylesheet" href="Bakery Style.css">
+</head>
+<body>
+    <br><br><br><br><br>
+    <div class="title">
+        <header>
+            <hr>
+            <h1>Tasty Treats</h1>
+            <hr>
+            <h2>Schedule: 8:00 AM to 5:00 PM</h2>
+            <hr>
+        </header>
+    </div>
+    <br>
+    <div class="container">
+        <form onsubmit="return submitOrder();" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your Name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your Email" required><br><br>
+            <hr>
+            <label for="flavor">Choose a Flavor:</label><br>
+            <input type="radio" id="chocolate" name="flavor" value="chocolate" data-price="5" required>
+            <label for="chocolate">Chocolate ($5)</label>
+            <input type="radio" id="vanilla" name="flavor" value="vanilla" data-price="4" required>
+            <label for="vanilla">Vanilla ($4)</label>
+            <input type="radio" id="strawberry" name="flavor" value="strawberry" data-price="6" required>
+            <label for="strawberry">Strawberry ($6)</label><br><br>
+            <hr>
+            <label for="size">Choose a Size:</label><br>
+            <input type="radio" id="small" name="size" value="small" data-price="3" required>
+            <label for="small">Small ($3)</label>
+            <input type="radio" id="medium" name="size" value="medium" data-price="5" required>
+            <label for="medium">Medium ($5)</label>
+            <input type="radio" id="big" name="size" value="big" data-price="7" required>
+            <label for="big">Big ($7)</label><br><br>
+            <hr>
+            <label for="design">Choose a Design:</label><br>
+            <input type="radio" id="polkadots" name="design" value="polkadots" data-price="2" required>
+            <label for="polkadots">Polkadots ($2)</label>
+            <input type="radio" id="stripes" name="design" value="stripes" data-price="3" required>
+            <label for="stripes">Stripes ($3)</label>
+            <input type="radio" id="zigzag" name="design" value="zigzag" data-price="4" required>
+            <label for="zigzag">Zig Zag ($4)</label><br><br>
+            <hr>
+            <label for="suggestions">Any Suggestions:</label><br>
+            <textarea name="suggestions" id="suggestions" placeholder="Enter your suggestions"></textarea><br><br>
+            <hr>
+            <h3>Total Price: $<span id="totalPrice">0</span></h3>
+            <hr>
+            <input type="submit" value="Submit Order"> 
+            <input type="reset" value="Reset Order" onclick="resetPrice()">
+            <input type="button" value="Cancel Order" onclick="cancelOrder()">
+        </form>
+    </div>
+    <script>
+        function calculateTotalPrice() {
+            let total = 0;
+            const selectedFlavor = document.querySelector('input[name="flavor"]:checked');
+            const selectedSize = document.querySelector('input[name="size"]:checked');
+            const selectedDesign = document.querySelector('input[name="design"]:checked');
+
+            if (selectedFlavor) {
+                total += parseFloat(selectedFlavor.getAttribute('data-price'));
+            }
+            if (selectedSize) {
+                total += parseFloat(selectedSize.getAttribute('data-price'));
+            }
+            if (selectedDesign) {
+                total += parseFloat(selectedDesign.getAttribute('data-price'));
+            }
+
+            document.getElementById('totalPrice').textContent = total.toFixed(2);
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach((input) => {
+            input.addEventListener('change', calculateTotalPrice);
+        });
+
+        function submitOrder() {
+            const flavor = document.querySelector('input[name="flavor"]:checked');
+            const size = document.querySelector('input[name="size"]:checked');
+            const design = document.querySelector('input[name="design"]:checked');
+            let missingOptions = [];
+
+            if (!flavor) {
+                missingOptions.push("flavor");
+            }
+            if (!size) {
+                missingOptions.push("size");
+            }
+            if (!design) {
+                missingOptions.push("design");
+            }
+
+            if (missingOptions.length > 0) {
+                alert('Please select the following options before submitting your order: ' + missingOptions.join(', ') + '.');
+                return false; 
+            } else {
+                alert('Order Submitted! Total Price: $' + document.getElementById('totalPrice').textContent);
+                return true; 
+            }
+        }
+
+        function resetPrice() {
+            document.getElementById('totalPrice').textContent = "0";
+        }
+
+        function cancelOrder() {
+            if (confirm("Are you sure you want to cancel your order?")) {
+                window.location.href = "Cancellation page.html"; 
+            }
+        }
+    </script>
+</body>
+</html>
